@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.sabbir.android.country.info.models.Country;
 import com.sabbir.android.country.info.models.Currency;
 import com.sabbir.android.country.info.models.Language;
+import com.sabbir.android.country.info.models.RegionalBloc;
 import com.sabbir.android.country.info.models.Translations;
 
 import org.json.JSONArray;
@@ -29,10 +30,39 @@ public class CountryParser {
             country.setTranslations(getTranslations(gson,jsonObject.getJSONObject("translations")));
             country.setLanguages(getLanguages(gson,jsonObject.getJSONArray("languages")));
             country.setCurrencies(getCurrencies(gson,jsonObject.getJSONArray("currencies")));
+            country.setLatlng(getLatLang(gson,jsonObject.getJSONArray("latlng")));
+            country.setRegionalBlocs(getRegionalBloc(gson,jsonObject.getJSONArray("regionalBlocs")));
+            country.setAltSpellings(getAltSpellings(gson,jsonObject.getJSONArray("altSpellings")));
             countries.add(country);
         }
 
         return countries;
+    }
+
+    private static List<String> getAltSpellings(Gson gson, JSONArray altSpellings) throws JSONException {
+        List<String> altStrings=new ArrayList<>();
+        for (int i=0;i<altSpellings.length();i++){
+            altStrings.add(altSpellings.getString(i));
+
+        }
+        return altStrings;
+    }
+
+    private static List<RegionalBloc> getRegionalBloc(Gson gson, JSONArray regionalBlocs) throws JSONException {
+        List<RegionalBloc>  regionalBlocsList=new ArrayList<>();
+        for (int i=0;i<regionalBlocs.length();i++){
+            RegionalBloc regionalBloc=gson.fromJson(regionalBlocs.getJSONObject(i).toString(),RegionalBloc.class);
+            regionalBlocsList.add(regionalBloc);
+        }
+        return regionalBlocsList;
+    }
+
+    private static List<Double> getLatLang(Gson gson, JSONArray latlng) throws JSONException {
+        List<Double> integers=new ArrayList<>();
+        for (int i=0;i<latlng.length();i++){
+            integers.add(latlng.getDouble(i));
+        }
+        return integers;
     }
 
     private static List<Currency> getCurrencies(Gson gson, JSONArray currencies) throws JSONException {

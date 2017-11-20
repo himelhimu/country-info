@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.google.gson.Gson;
+import com.sabbir.android.country.info.activities.parser.CountryParser;
 import com.sabbir.android.country.info.models.Country;
 
 import org.json.JSONArray;
@@ -50,19 +51,14 @@ public class GetAllCountryTask extends AsyncTask<String,Void,List<Country>> {
     }
 
     private List<Country> getAllCountries(String json) throws JSONException {
-        JSONArray jsonArray=new JSONArray(json);
-        List<Country> countries=new ArrayList<>();
-        for (int i=0;i<jsonArray.length();i++){
-            Country country= new Gson().fromJson(jsonArray.getJSONObject(i).toString(),Country.class);
-            country.setTranslations(getTranslations());
-            countries.add(country);
-        }
-        return countries;
+        return CountryParser.getAllCountries(json);
+
     }
 
     @Override
     protected void onPostExecute(List<Country> countries) {
         super.onPostExecute(countries);
+        progressDialog.dismiss();
         listener.receivedCountryList(countries);
     }
 
