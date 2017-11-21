@@ -7,5 +7,6 @@ package com.sabbir.android.country.info.constans;
 public final class AppConstants {
 
     public static final String ALL_COUNTRY_URL="https://restcountries.eu/rest/v2/all";
+    public static final String SINGLE_COUNTRY_QUERY_URL="https://restcountries.eu/rest/v2/name/";
     public static final String COUNTRY_LIST_INTENT_KEY ="countries" ;
 }
