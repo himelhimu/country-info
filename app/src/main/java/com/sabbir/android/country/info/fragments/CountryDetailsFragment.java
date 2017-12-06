@@ -46,7 +46,7 @@ public class CountryDetailsFragment extends BaseFragment {
         Country  country= (Country) getArguments().getSerializable(AppConstants.COUNTRY_LIST_INTENT_KEY);
         for (Map.Entry<String, Object> entry:pojo2Map(country).entrySet()){
             TextView textView=new TextView(getContext());
-            textView.setText((String)entry.getValue());
+            textView.setText(""+entry.getValue());
         }
        tvDetails.setText(country.toString());
     }

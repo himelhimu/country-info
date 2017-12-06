@@ -66,6 +66,7 @@ public class GetAllCountryTask extends AsyncTask<String,Void,List<Country>> {
     protected void onPreExecute() {
         super.onPreExecute();
         progressDialog=new ProgressDialog(mContext);
+        progressDialog.setCancelable(false);
         progressDialog.setMessage("Getting data..Please Wait");
         progressDialog.show();
     }

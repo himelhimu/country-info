@@ -33,10 +33,19 @@ public class CountryParser {
             country.setLatlng(getLatLang(gson,jsonObject.getJSONArray("latlng")));
             country.setRegionalBlocs(getRegionalBloc(gson,jsonObject.getJSONArray("regionalBlocs")));
             country.setAltSpellings(getAltSpellings(gson,jsonObject.getJSONArray("altSpellings")));
+            country.setTopLevelDomain(getTopLevelDomains(gson,jsonObject.getJSONArray("topLevelDomain")));
             countries.add(country);
         }
 
         return countries;
+    }
+
+    private static List<String> getTopLevelDomains(Gson gson, JSONArray topLevelDomain) throws JSONException {
+        List<String> strings=new ArrayList<>();
+        for(int i=0;i<topLevelDomain.length();i++){
+            strings.add(topLevelDomain.getString(i));
+        }
+        return strings;
     }
 
     private static List<String> getAltSpellings(Gson gson, JSONArray altSpellings) throws JSONException {

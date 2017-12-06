@@ -2,6 +2,7 @@ package com.sabbir.android.country.info.activities;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -62,6 +63,7 @@ public class MainActivity extends BaseActivity implements GetAllCountryTask.GetA
     @Override
     public void receivedCountryList(List<Country> countries) {
         countryArrayList= (ArrayList<Country>) countries;
-        navigation.setSelectedItemId(R.id.navigation_home);
+        new Handler().post(() -> navigation.setSelectedItemId(R.id.navigation_home));
+
     }
 }
